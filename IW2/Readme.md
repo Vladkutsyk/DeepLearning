@@ -30,14 +30,14 @@ The development process followed a rigorous experimental pipeline, progressing f
 ### 1. BERT (Bidirectional Encoder Representations from Transformers)
 The core of our solution relies on BERT, specifically the **GBERT** (Deepset) and **DBMDZ** implementations. BERT utilizes a multi-layer bidirectional Transformer encoder to learn deep bidirectional representations by jointly conditioning on both left and right contexts in all layers.
 
-![BERT Architecture](https://jalammar.github.io/images/bert-base-bert-large.png)
-*(Figure 1: Comparison of BERT Base and BERT Large model architectures. Source: Jay Alammar)*
+<img width="2866" height="1825" alt="image" src="https://github.com/user-attachments/assets/b7bb9439-a21d-4795-8f1a-7cd40879d1a5" />
+
 
 ### 2. ELECTRA (Efficiently Learning an Encoder that Classifies Token Replacements)
 We utilized **GELECTRA** to introduce architectural diversity. Unlike BERT, which uses Masked Language Modeling (MLM), ELECTRA employs a sample-efficient pre-training task called Replaced Token Detection (RTD). A generator network replaces tokens with plausible alternatives, and a discriminator network determines whether each token is original or replaced.
 
-![ELECTRA Architecture](https://miro.medium.com/v2/resize:fit:2000/1*X_W3Qz-gZzXJ9L7W5Z2z9w.png)
-*(Figure 2: The ELECTRA Generator-Discriminator architecture. Source: Google Research)*
+<img width="1106" height="380" alt="image" src="https://github.com/user-attachments/assets/4c326901-bdcf-4a5e-8c7f-c2cbfa5e461a" />
+
 
 ---
 
@@ -45,14 +45,14 @@ We utilized **GELECTRA** to introduce architectural diversity. Unlike BERT, whic
 
 ### Data Preprocessing
 * **Normalization:** HTML entity decoding and whitespace normalization.
-* **Tokenization:** Utilized `bert-base-german-cased` and `gbert-large` tokenizers with a maximum sequence length of 512 tokens to preserve full context.
+* **Tokenization:** Utilized `bert-base-german-cased` and `gbert-large` tokenizers with a maximum sequence length of 256 tokens to preserve full context.
 * **Label Encoding:** Mapped categorical targets to integer indices using `LabelEncoder`.
 
 ### Optimization Techniques
 To facilitate the training of Large models (340M+ parameters) on limited GPU resources (Tesla T4), the following optimizations were implemented:
 1.  **Gradient Checkpointing:** Reduced VRAM usage by 50-60% by trading compute for memory during the backward pass.
 2.  **Mixed Precision Training (FP16):** Utilized `torch.amp` to accelerate training throughput and reduce memory footprint.
-3.  **Gradient Accumulation:** Simulated a batch size of 32 by accumulating gradients over 8 steps with a physical batch size of 4.
+3.  **Gradient Accumulation:** Simulated a batch size.
 
 ### Training Strategy: Incremental Repeated K-Fold
 Instead of standard Cross-Validation, we implemented **Incremental Learning**:
@@ -66,7 +66,7 @@ Instead of standard Cross-Validation, we implemented **Incremental Learning**:
 
 The final evaluation was conducted using a sequential sampling strategy on the full training set to generate a comprehensive Error Analysis report.
 
-* **Metric:** Accuracy and F1-Score (Weighted).
+* **Metric:** Accuracy.
 * **Best Single Model:** `deepset/gbert-large` (92.6%).
 * **Ensemble Strategy:** Soft-voting averaging of probability distributions from 10 training cycles.
 
