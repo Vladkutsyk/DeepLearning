@@ -21,7 +21,7 @@ The development process followed a rigorous experimental pipeline, progressing f
 | **gbert-large** | Gradient Accumulation (BS=32) | **~92%** Accuracy. Demonstrated the best result on public leaderboard. |
 | **gelectra-large** | Generator-Discriminator | **~89%** Validated performance on ambiguous tokens; used for diversity. |
 | **dbmdz/bert-base** | Repeated K-Fold | **~90.8%** Tested stability on formal German vocabulary. |
-| **gbert-large** | **Incremental Repeated K-Fold** | **~91.6%** Accuracy.|
+| **gbert-large** | **Incremental Repeated K-Fold** | **~91.6%** Accuracy. The final pipeline to test. |
 
 ---
 
@@ -45,7 +45,7 @@ We utilized **GELECTRA** to introduce architectural diversity. Unlike BERT, whic
 
 ### Data Preprocessing
 * **Normalization:** HTML entity decoding and whitespace normalization.
-* **Tokenization:** Utilized `bert-base-german-cased` and `gbert-large` tokenizers with a maximum sequence length of 256 tokens to preserve full context.
+* **Tokenization:** Utilized `bert-base-german-cased`, `gbert-base` and `gbert-large` tokenizers with a maximum sequence length of 256 tokens to preserve full context.
 * **Label Encoding:** Mapped categorical targets to integer indices using `LabelEncoder`.
 
 ### Optimization Techniques
