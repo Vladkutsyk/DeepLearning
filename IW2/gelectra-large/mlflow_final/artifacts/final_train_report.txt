@@ -1,0 +1,15 @@
+               precision    recall  f1-score   support
+
+         Etat       0.99      0.99      0.99       601
+       Inland       1.00      0.97      0.99       913
+International       1.00      0.99      0.99      1360
+       Kultur       0.98      1.00      0.99       485
+     Panorama       0.98      0.99      0.98      1510
+        Sport       1.00      1.00      1.00      1081
+          Web       1.00      1.00      1.00      1509
+   Wirtschaft       0.99      1.00      1.00      1270
+ Wissenschaft       0.98      0.99      0.98       516
+
+     accuracy                           0.99      9245
+    macro avg       0.99      0.99      0.99      9245
+ weighted avg       0.99      0.99      0.99      9245

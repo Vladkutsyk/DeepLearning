@@ -1,0 +1,11 @@
+{
+    "model_name": "deepset/gelectra-large",
+    "n_splits": 5,
+    "epochs": 1,
+    "seed": 42,
+    "max_grad_norm": 1.0,
+    "weight_decay": 0.01,
+    "grad_accum_steps": 1,
+    "batch_size": 16,
+    "lr": 2e-05
+}
