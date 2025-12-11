@@ -1,0 +1,11 @@
+{
+    "model_name": "deepset/gbert-base",
+    "n_splits": 10,
+    "epochs": 2,
+    "seed": 42,
+    "max_grad_norm": 1.0,
+    "weight_decay": 0.01,
+    "grad_accum_steps": 1,
+    "batch_size": 32,
+    "lr": 2e-05
+}
