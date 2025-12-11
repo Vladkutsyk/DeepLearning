@@ -13,15 +13,15 @@ The final solution leverages **Large Language Models**, **Gradient Checkpointing
 
 ## Model Evolution Pipeline
 
-The development process followed a rigorous experimental pipeline, progressing from baseline architectures to high-capacity ensemble models.
+The development process followed a rigorous experimental pipeline, progressing from baseline architectures to high-capacity models.
 
 | Architecture | Configuration | Outcome |
 | :--- | :--- | :--- |
-| **gbert-base** | Baseline | **~89.0%** Accuracy. Established lower bound performance. |
-| **gbert-large** | Gradient Accumulation (BS=32) | **~91.3%** Accuracy. Demonstrated the necessity of higher parameter counts. |
-| **gelectra-large** | Generator-Discriminator | Validated performance on ambiguous tokens; used for diversity. |
-| **dbmdz/bert-base** | Repeated K-Fold | Tested stability on formal German vocabulary. |
-| **gbert-large** | **Incremental Repeated Ensemble** | **~92.6%+** Accuracy. Final winning strategy utilizing soft-voting ensembles. |
+| **gbert-base** | Baseline | **~91%** Accuracy. Established lower bound performance. |
+| **gbert-large** | Gradient Accumulation (BS=32) | **~92%** Accuracy. Demonstrated the best result on public leaderboard. |
+| **gelectra-large** | Generator-Discriminator | **~89%** Validated performance on ambiguous tokens; used for diversity. |
+| **dbmdz/bert-base** | Repeated K-Fold | **~90.8%** Tested stability on formal German vocabulary. |
+| **gbert-large** | **Incremental Repeated K-Fold** | **~91.6%** Accuracy.|
 
 ---
 
@@ -54,7 +54,7 @@ To facilitate the training of Large models (340M+ parameters) on limited GPU res
 2.  **Mixed Precision Training (FP16):** Utilized `torch.amp` to accelerate training throughput and reduce memory footprint.
 3.  **Gradient Accumulation:** Simulated a batch size.
 
-### Training Strategy: Incremental Repeated K-Fold
+### Last Training Strategy: Incremental Repeated K-Fold
 Instead of standard Cross-Validation, we implemented **Incremental Learning**:
 1.  The dataset was split into **5 folds**.
 2.  This process was **repeated 2 times** with different seeds.
@@ -64,11 +64,8 @@ Instead of standard Cross-Validation, we implemented **Incremental Learning**:
 
 ## Results and Evaluation
 
-The final evaluation was conducted using a sequential sampling strategy on the full training set to generate a comprehensive Error Analysis report.
+<img width="1532" height="595" alt="image" src="https://github.com/user-attachments/assets/ad6c5159-1168-41dd-a848-d0a3919386be" />
 
-* **Metric:** Accuracy.
-* **Best Single Model:** `deepset/gbert-large` (92.6%).
-* **Ensemble Strategy:** Soft-voting averaging of probability distributions from 10 training cycles.
 
 ## Usage
 
@@ -78,10 +75,10 @@ The final evaluation was conducted using a sequential sampling strategy on the f
     ```
 
 2.  **Execution**
-    Run the unified Jupyter Notebook `LNU_Text_Classification_Solution.ipynb`. The pipeline will automatically:
+    Run the Jupyter Notebook. The pipeline will automatically:
     * Download and extract data.
     * Tune hyperparameters.
-    * Execute the Incremental Repeated CV training.
+    * Execute the Incremental Repeated CV training or Tuning.
     * Generate the `submission_final.csv` file.
 
 3.  **Inference**
